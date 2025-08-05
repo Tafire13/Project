@@ -2,7 +2,7 @@ package gui;
 
 import manage.ThemeColors;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 
@@ -13,8 +13,8 @@ public class LegendPanel {
     private JPanel dataPanel;
     private JPanel panelGrid;
     private JPanel SouthPanal;
+    private JPanel fileControlPanel;
     ThemeColors themeColors = new ThemeColors();
-
     public LegendPanel() {
         leftPanel = new JPanel();
         RightPanel = new JPanel();
@@ -22,6 +22,7 @@ public class LegendPanel {
         panelGrid = new JPanel();
         dataPanel = new JPanel();
         SouthPanal = new JPanel();
+        fileControlPanel = new JPanel();
 
         setLeftPanel(leftPanel);
         setRightPanel(RightPanel);
@@ -29,9 +30,11 @@ public class LegendPanel {
         setDataPanel(dataPanel);
         setSouthPanal(SouthPanal);
         setPanelGrid(panelGrid);
+        setFileControlPanel(fileControlPanel);
 
         addInfoGrid();
         addInfoData();
+        fileControl();
     }
 
     public void setLeftPanel(JPanel leftPanel) {
@@ -94,11 +97,29 @@ public class LegendPanel {
         return SouthPanal;
     }
 
+    public void setFileControlPanel(JPanel fileControlPanel) {
+        this.fileControlPanel = fileControlPanel;
+        this.fileControlPanel.setPreferredSize(new Dimension(400, 170));
+        this.fileControlPanel.setBackground(themeColors.white);
+        this.fileControlPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 40, 10));
+        this.fileControlPanel.setBorder(new LineBorder(themeColors.black, 2));
+    }
+
+    public JPanel getPanelGrid() {
+        return panelGrid;
+    }
     public void addInfoData() {
         RightPanel.add(dataPanel);
+        RightPanel.add(fileControlPanel);
     }
     public void addInfoGrid() {
         leftPanel.add(panelGridInfo);
         panelGridInfo.add(panelGrid);
+    }
+    public void fileControl(){
+        MainButtons mainButtons = new MainButtons();
+        fileControlPanel.add(mainButtons.getTextField());
+        fileControlPanel.add(mainButtons.getCalculate());
+        fileControlPanel.add(mainButtons.getOpenFile());
     }
 }

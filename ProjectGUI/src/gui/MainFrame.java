@@ -13,6 +13,7 @@ public class MainFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(constant.width, constant.height);
         setLayout(new BorderLayout());
+        setResizable(false);
         setLocationRelativeTo(null);
         addComponent();
     }
