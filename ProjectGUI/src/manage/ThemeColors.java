@@ -23,7 +23,7 @@ public class ThemeColors {
     public Color slatePurple = new Color(106, 90, 205);
     public Color chocolate = new Color(210, 105, 30);
     public Color limeGreen = new Color(50, 205, 50);
-    public Color salmonPink = new Color(246, 239, 210);
+    public Color salmonPink = new Color(174, 133, 170);
     public Color darkOrange = new Color(255, 140, 0);
     public Color deepSkyBlue = new Color(0, 191, 255);
 
