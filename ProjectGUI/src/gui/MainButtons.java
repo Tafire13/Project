@@ -68,7 +68,11 @@ public class MainButtons {
             textField.setText("");
             int dept = Integer.parseInt(str);
         } catch (NumberFormatException e) {
-            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null,
+                    "Please enter the correct number",
+                    "An error occurred",
+                    JOptionPane.ERROR_MESSAGE);
+            textField.requestFocus();
         }
     }
 }
