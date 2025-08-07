@@ -15,7 +15,6 @@ public class ThemeColors {
     public Color indigoBlue = new Color(83, 102, 255);
     public Color mintGreen = new Color(60, 179, 113);
     public Color coralRed = new Color(255, 127, 80);
-
     public Color gold = new Color(255, 255, 255);
     public Color cornflowerBlue = new Color(100, 149, 237);
     public Color crimsonRed = new Color(220, 20, 60);

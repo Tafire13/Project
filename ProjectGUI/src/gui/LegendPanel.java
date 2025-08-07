@@ -15,6 +15,9 @@ public class LegendPanel {
     private JPanel SouthPanal;
     private JPanel fileControlPanel;
     ThemeColors themeColors = new ThemeColors();
+    private MainButtons mainButtons;
+    private JButton[] Grid;
+
     public LegendPanel() {
         leftPanel = new JPanel();
         RightPanel = new JPanel();
@@ -31,6 +34,7 @@ public class LegendPanel {
         setSouthPanal(SouthPanal);
         setPanelGrid(panelGrid);
         setFileControlPanel(fileControlPanel);
+        mainButtons = new MainButtons(this);
 
         addInfoGrid();
         addInfoData();
@@ -79,6 +83,7 @@ public class LegendPanel {
     public void setPanelGrid(JPanel panelGrid) {
         this.panelGrid.setPreferredSize(new Dimension(795, 395));
         this.panelGrid.setBackground(themeColors.white);
+        this.panelGrid.setLayout(new GridLayout(10, 20));
         this.panelGrid.setBorder(new LineBorder(themeColors.black, 2));
     }
 
@@ -108,18 +113,28 @@ public class LegendPanel {
     public JPanel getPanelGrid() {
         return panelGrid;
     }
+
     public void addInfoData() {
         RightPanel.add(dataPanel);
         RightPanel.add(fileControlPanel);
     }
+
     public void addInfoGrid() {
         leftPanel.add(panelGridInfo);
         panelGridInfo.add(panelGrid);
     }
-    public void fileControl(){
-        MainButtons mainButtons = new MainButtons();
+
+    public void fileControl() {
         fileControlPanel.add(mainButtons.getTextField());
         fileControlPanel.add(mainButtons.getCalculate());
         fileControlPanel.add(mainButtons.getOpenFile());
+    }
+
+    public void addGrid(JButton[] button) {
+        panelGrid.removeAll();
+        for (int i = 0; i < button.length; i++) {
+            button[i].setBackground(themeColors.aquaMarine);
+            panelGrid.add(button[i]);
+        }
     }
 }

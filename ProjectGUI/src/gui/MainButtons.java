@@ -1,18 +1,23 @@
 package gui;
 
+import manage.ThemeColors;
+
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 
 public class MainButtons {
+    private LegendPanel legendPanel;
     private JButton Calculate;
     private JButton OpenFile;
     private JButton Back;
     private JButton Credit;
     private JTextField textField;
+    private JButton[] Grid;
+    ThemeColors themeColors = new ThemeColors();
 
-    public MainButtons() {
+    public MainButtons(LegendPanel legendPanel) {
+        this.legendPanel = legendPanel;
         Calculate = new JButton();
         setTextField();
         setCalculate(Calculate);
@@ -47,6 +52,7 @@ public class MainButtons {
         Calculate.setPreferredSize(new Dimension(300, 30));
         Calculate.addActionListener(e -> {
             clickCalculate();
+            legendPanel.addGrid(Grid);
         });
     }
 
@@ -56,10 +62,13 @@ public class MainButtons {
 
     public void clickOpenFile() {
         JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setCurrentDirectory(new File("src"));
         if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
-            System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+            setCalculateDept(selectedFile);
         }
+
+
     }
 
     public void clickCalculate() {
@@ -74,5 +83,40 @@ public class MainButtons {
                     JOptionPane.ERROR_MESSAGE);
             textField.requestFocus();
         }
+    }
+
+    public void setCalculateDept(File file) {
+        try {
+            BufferedReader readFile = new BufferedReader(new FileReader(file));
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = readFile.readLine()) != null) {
+                sb.append(line).append("\n");
+            }
+            String str = sb.toString();
+            String[] token = str.trim().split("\\s+");
+            int[] Numeric = new int[token.length];
+            Grid = new JButton[Numeric.length];
+            for (int i = 0; i < token.length; i++) {
+                Numeric[i] = Integer.parseInt(token[i]);
+                Grid[i] = new JButton(String.valueOf(Numeric[i]));
+                Grid[i].setFocusable(false);
+            }
+
+            legendPanel.addGrid(Grid);
+            legendPanel.getPanelGrid().revalidate();
+            legendPanel.getPanelGrid().repaint();
+
+        } catch (FileNotFoundException e) {
+            JOptionPane.showMessageDialog(null,
+                    "File Not Found",
+                    "File Not Found",
+                    JOptionPane.ERROR_MESSAGE);
+        } catch (IOException e) {
+        }
+    }
+
+    public int getLength() {
+        return Grid.length;
     }
 }
