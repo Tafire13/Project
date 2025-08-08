@@ -130,12 +130,12 @@ public class LegendPanel {
         fileControlPanel.add(mainButtons.getOpenFile());
     }
 
-    public void addGrid(JButton[] button, double[] Persen) {
+    public void addGrid(JButton[] button, double[] Percen) {
         panelGrid.removeAll();
         for (int i = 0; i < button.length; i++) {
-            if (Persen[i] == 0) {
+            if (Percen[i] == 0) {
                 button[i].setBackground(themeColors.red);
-            } else if (Persen[i]>= 50) {
+            } else if (Percen[i]<= 50) {
                 button[i].setBackground(themeColors.brightYellow);
             } else {
                 button[i].setBackground(themeColors.brightGreen);
