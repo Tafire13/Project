@@ -34,6 +34,7 @@ public class MainButtons {
     public void setTextField() {
         textField = new JTextField("2500");
         textField.setPreferredSize(new Dimension(300, 30));
+        textField.setCaretColor(new Color(0, 0, 0, 0));
         textField.setHorizontalAlignment(JTextField.CENTER);
     }
 
