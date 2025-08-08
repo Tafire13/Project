@@ -2,6 +2,7 @@ package gui;
 
 import manage.ThemeColors;
 import manage.constant;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
@@ -58,8 +59,15 @@ public class MainButtons {
         Calculate.setFocusable(false);
         Calculate.setPreferredSize(new Dimension(300, 30));
         Calculate.addActionListener(e -> {
-            clickCalculate();
-            legendPanel.addGrid(Grid, PercenGas);
+            if (token != null && Grid != null && PercenGas != null) {
+                clickCalculate();
+                legendPanel.addGrid(Grid, PercenGas);
+            } else {
+                JOptionPane.showMessageDialog(null,
+                        "Please open a file first before calculating.",
+                        "No File Loaded",
+                        JOptionPane.WARNING_MESSAGE);
+            }
         });
     }
 
@@ -80,6 +88,13 @@ public class MainButtons {
 
     public void clickCalculate() {
         try {
+            if (token == null || dept == null) {
+                JOptionPane.showMessageDialog(null,
+                        "Please open a file first before calculating.",
+                        "No File Loaded",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
             String str = textField.getText().trim();
             int fluid = Integer.parseInt(textField.getText());
             calculateDepth(dept, token, fluid);
@@ -128,21 +143,24 @@ public class MainButtons {
     public int getLength() {
         return Grid.length;
     }
-    public int getGasVolume(int dept, int Fluid){
-        int topHorizon = dept-200;
+
+    public int getGasVolume(int dept, int Fluid) {
+        int topHorizon = dept - 200;
         int minDept = Math.min(Fluid, dept);
-        if(Fluid <= topHorizon) return 0;
-        int GasVolume = con.WidthY * con.LengthX * (minDept-(topHorizon));
+        if (Fluid <= topHorizon) return 0;
+        int GasVolume = con.WidthY * con.LengthX * (minDept - (topHorizon));
         return GasVolume;
     }
-    public double getPercen(int dept, int fluid){
-        int topHorizon  = dept - 200;
+
+    public double getPercen(int dept, int fluid) {
+        int topHorizon = dept - 200;
         int totalGas = dept - topHorizon;
-        if(totalGas <= 0) return 0;
-        double GasVolume = Math.max(0,Math.min(fluid, dept)-topHorizon);
-        return (GasVolume / totalGas) *100;
+        if (totalGas <= 0) return 0;
+        double GasVolume = Math.max(0, Math.min(fluid, dept) - topHorizon);
+        return (GasVolume / totalGas) * 100;
     }
-    public void calculateDepth(int[] dept, String[] token, int fluid){
+
+    public void calculateDepth(int[] dept, String[] token, int fluid) {
         for (int i = 0; i < token.length; i++) {
             dept[i] = Integer.parseInt(token[i]);
             gasVolume[i] = getGasVolume(dept[i], fluid);
