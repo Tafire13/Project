@@ -1,10 +1,11 @@
 package gui;
 
 import manage.ThemeColors;
-
+import manage.constant;
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
+import java.time.Period;
 
 public class MainButtons {
     private LegendPanel legendPanel;
@@ -14,7 +15,9 @@ public class MainButtons {
     private JButton Credit;
     private JTextField textField;
     private JButton[] Grid;
+    private double[] PercenGas;
     ThemeColors themeColors = new ThemeColors();
+    constant con = new constant();
 
     public MainButtons(LegendPanel legendPanel) {
         this.legendPanel = legendPanel;
@@ -52,7 +55,7 @@ public class MainButtons {
         Calculate.setPreferredSize(new Dimension(300, 30));
         Calculate.addActionListener(e -> {
             clickCalculate();
-            legendPanel.addGrid(Grid);
+            legendPanel.addGrid(Grid, PercenGas);
         });
     }
 
@@ -95,15 +98,18 @@ public class MainButtons {
             }
             String str = sb.toString();
             String[] token = str.trim().split("\\s+");
-            int[] Numeric = new int[token.length];
-            Grid = new JButton[Numeric.length];
+            int[] dept = new int[token.length];
+            Grid = new JButton[dept.length];
+            int gasVolume[] = new int[dept.length];
+            PercenGas = new double[dept.length];
             for (int i = 0; i < token.length; i++) {
-                Numeric[i] = Integer.parseInt(token[i]);
-                Grid[i] = new JButton(String.valueOf(Numeric[i]));
+                dept[i] = Integer.parseInt(token[i]);
+                gasVolume[i] = getGasVolume(dept[i]);
+                PercenGas[i] = getPercen(dept[i]);
+                Grid[i] = new JButton(String.valueOf(PercenGas[i]) + "%");
                 Grid[i].setFocusable(false);
             }
-
-            legendPanel.addGrid(Grid);
+            legendPanel.addGrid(Grid, PercenGas);
             legendPanel.getPanelGrid().revalidate();
             legendPanel.getPanelGrid().repaint();
 
@@ -118,5 +124,20 @@ public class MainButtons {
 
     public int getLength() {
         return Grid.length;
+    }
+    public int getGasVolume(int dept){
+        int topHorizon = dept-200;
+        int Fluid = 2500;
+        int minDept = Math.min(Fluid, dept);
+        if(Fluid <= topHorizon) return 0;
+        int GasVolume = con.WidthY * con.LengthX * (minDept-(topHorizon));
+        return GasVolume;
+    }
+    public double getPercen(int dept){
+        int topHorizon  = dept - 200;
+        int totalGas = dept - topHorizon;
+        if(totalGas <= 0) return 0;
+        double GasVolume = Math.max(0,Math.min(2500, dept)-topHorizon);
+        return (GasVolume / totalGas) *100;
     }
 }

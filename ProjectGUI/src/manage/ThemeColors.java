@@ -4,6 +4,7 @@ import java.awt.Color;
 
 public class ThemeColors {
     public Color black = new Color(0, 0, 0);
+    public Color red = new Color(255, 0, 0);
     public Color white = new Color( 246, 239, 210);
     public Color redPink = new Color(255, 99, 132);
     public Color skyBlue = new Color(54, 162, 235);

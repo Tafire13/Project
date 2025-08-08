@@ -64,9 +64,9 @@ public class LegendPanel {
     }
 
     public void setPanelGridInfo(JPanel panelGridInfo) {
-        this.panelGridInfo.setPreferredSize(new Dimension(800, 400));
+        this.panelGridInfo.setPreferredSize(new Dimension(850, 450));
         this.panelGridInfo.setBackground(themeColors.white);
-        this.panelGridInfo.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        this.panelGridInfo.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 2));
         this.panelGridInfo.setBorder(new LineBorder(Color.BLACK, 2));
     }
 
@@ -81,7 +81,7 @@ public class LegendPanel {
     }
 
     public void setPanelGrid(JPanel panelGrid) {
-        this.panelGrid.setPreferredSize(new Dimension(795, 395));
+        this.panelGrid.setPreferredSize(new Dimension(840, 440));
         this.panelGrid.setBackground(themeColors.white);
         this.panelGrid.setLayout(new GridLayout(10, 20));
         this.panelGrid.setBorder(new LineBorder(themeColors.black, 2));
@@ -130,10 +130,16 @@ public class LegendPanel {
         fileControlPanel.add(mainButtons.getOpenFile());
     }
 
-    public void addGrid(JButton[] button) {
+    public void addGrid(JButton[] button, double[] Persen) {
         panelGrid.removeAll();
         for (int i = 0; i < button.length; i++) {
-            button[i].setBackground(themeColors.aquaMarine);
+            if (Persen[i] == 0) {
+                button[i].setBackground(themeColors.red);
+            } else if (Persen[i]>= 50) {
+                button[i].setBackground(themeColors.brightYellow);
+            } else {
+                button[i].setBackground(themeColors.brightGreen);
+            }
             panelGrid.add(button[i]);
         }
     }
