@@ -101,7 +101,6 @@ public class aboutPanel {
     private ImageIcon loadImage(String path, int width, int height) {
         java.net.URL imgURL = getClass().getResource(path);
         if (imgURL == null) {
-            System.err.println("Image not found: " + path);
             return null;
         }
         Image img = new ImageIcon(imgURL).getImage()
