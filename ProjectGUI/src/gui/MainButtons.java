@@ -45,6 +45,7 @@ public class MainButtons {
     public void setOpenFile() {
         OpenFile = new JButton("Open File");
         OpenFile.setPreferredSize(new Dimension(300, 30));
+        OpenFile.setBackground(themeColors.brightTurquoise);
         OpenFile.setFocusable(false);
         OpenFile.addActionListener(e -> {
             clickOpenFile();
@@ -59,6 +60,7 @@ public class MainButtons {
         Calculate = new JButton("Calculate");
         Calculate.setFocusable(false);
         Calculate.setPreferredSize(new Dimension(300, 30));
+        Calculate.setBackground(themeColors.brightLime);
         Calculate.addActionListener(e -> {
             if (token != null && Grid != null && PercenGas != null) {
                 clickCalculate();

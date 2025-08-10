@@ -10,12 +10,10 @@ import manage.ThemeColors;
 
 public class AboutFrame extends JFrame {
     private ThemeColors themeColors = new ThemeColors();
-    private ImageIcon[] imageIcon;
-    private JPanel topPanel;
-    private JPanel buttomPanel;
-    private JPanel centerPanel;
 
+    private aboutPanel AboutPanel;
     public AboutFrame() {
+        AboutPanel = new aboutPanel();
         setTitle("About");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1250, 800);
@@ -23,21 +21,8 @@ public class AboutFrame extends JFrame {
         setResizable(false);
         setLayout(new BorderLayout());
         getContentPane().setBackground(new Color(255, 230, 230));
-        this.topPanel = getPanel();
-        this.buttomPanel = getPanel();
-        this.centerPanel = getPanel();
-        setTopPanel(topPanel);
-        setBottomLabel(buttomPanel);
-        setCenterPanel(centerPanel);
 
-        JLabel title = new JLabel("About Group");
-        title.setFont(new Font("Arial", Font.BOLD, 48));
-        title.setBounds(500, 30, 2000, 50);
-        add(topPanel, BorderLayout.NORTH);
-        add(centerPanel, BorderLayout.CENTER);
-        add(buttomPanel, BorderLayout.SOUTH);
-        topPanel.add(title, BorderLayout.CENTER);
-
+        addComponentAbout();
         /*ImageIcon imageIcon = new ImageIcon("c.JPG");
         Image image = imageIcon.getImage().getScaledInstance(350, 350, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(image);
@@ -145,54 +130,16 @@ public class AboutFrame extends JFrame {
         });
 
 */
-        JButton backButton = new JButton("Back");
-        backButton.setBounds(30, 700, 120, 40);
-        backButton.setFocusable(false);
-        backButton.setBackground(new Color(255, 0, 0));
-        backButton.setFont(new Font("Arial", Font.PLAIN, 18));
-        buttomPanel.add(backButton);
 
         setVisible(true);
     }
 
-    public void setImageIcon() {
-        this.imageIcon = new ImageIcon[]{
-                getImageIcon("c.JPG", 350, 350),
-                getImageIcon("q.JPG", 350, 350),
-                getImageIcon("p.JPG", 350, 350)
-        };
+
+    public void addComponentAbout(){
+        add(AboutPanel.getTopPanel(), BorderLayout.NORTH);
+        add(AboutPanel.getCenterPanel(), BorderLayout.CENTER);
+        add(AboutPanel.getButtomPanel(), BorderLayout.SOUTH);
     }
-
-    private ImageIcon getImageIcon(String path, int width, int height) {
-        Image img = new ImageIcon(path).getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        return new ImageIcon(img);
-    }
-
-    public void setTopPanel(JPanel topPanel) {
-        this.topPanel = topPanel;
-        this.topPanel.setPreferredSize(new Dimension(100, 100));
-        this.topPanel.setBackground(themeColors.white);
-        this.topPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 20));
-    }
-
-
-    public void setBottomLabel(JPanel buttomPanel) {
-        this.buttomPanel = buttomPanel;
-        this.buttomPanel.setPreferredSize(new Dimension(100, 100));
-        this.buttomPanel.setBorder(new LineBorder(themeColors.black, 2));
-        this.buttomPanel.setBackground(themeColors.white);
-        this.buttomPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 50, 40));
-    }
-
-    public void setCenterPanel(JPanel centerPanel) {
-        this.centerPanel = centerPanel;
-        this.centerPanel.setBorder(new LineBorder(themeColors.black, 2));
-    }
-
-    public JPanel getPanel() {
-        return new JPanel();
-    }
-
 
     public static void main(String[] args) {
         new AboutFrame();
