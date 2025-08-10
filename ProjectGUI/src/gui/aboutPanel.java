@@ -95,7 +95,7 @@ public class aboutPanel {
         this.imageIcon = new ImageIcon[3];
         this.imageIcon[0] = loadImage("/image/chok.JPG", 295, 400);
         this.imageIcon[1] = loadImage("/image/khunQ.JPG", 295, 400);
-        this.imageIcon[2] = loadImage("/image/p.JPG", 295, 400);
+        this.imageIcon[2] = loadImage("/image/sudlor.JPG", 500, 400);
     }
 
     private ImageIcon loadImage(String path, int width, int height) {
