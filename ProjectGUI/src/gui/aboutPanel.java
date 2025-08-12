@@ -34,7 +34,6 @@ public class aboutPanel {
         addData(DataLabel, imagePanel);
 
         buttomPanel.add(backButton);
-
         JLabel title = new JLabel("About Group");
         title.setFont(new Font("Arial", Font.BOLD, 48));
         title.setBounds(500, 30, 2000, 50);

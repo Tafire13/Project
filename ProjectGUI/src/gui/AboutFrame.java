@@ -19,6 +19,7 @@ public class AboutFrame extends JFrame {
         getContentPane().setBackground(new Color(255, 230, 230));
         addComponentAbout();
         setVisible(true);
+        clickBackButton(AboutPanel.getBackButton());
     }
 
 
@@ -26,6 +27,13 @@ public class AboutFrame extends JFrame {
         add(AboutPanel.getTopPanel(), BorderLayout.NORTH);
         add(AboutPanel.getCenterPanel(), BorderLayout.CENTER);
         add(AboutPanel.getButtomPanel(), BorderLayout.SOUTH);
+    }
+    public void clickBackButton(JButton button){
+        button.addActionListener(e->{
+            dispose();
+            setVisible(false);
+            new MainFrame().setVisible(true);
+        });
     }
 
     public static void main(String[] args) {
