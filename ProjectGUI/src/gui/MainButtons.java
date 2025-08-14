@@ -18,8 +18,8 @@ public class MainButtons {
     private JTextField textField;
     private JButton[] Grid;
     private double[] PercenGas;
-    public int[] gasVolume;
-    private int[] dept;
+    public double[] gasVolume;
+    private double[] dept;
     private String[] token;
     ThemeColors themeColors = new ThemeColors();
     constant con = new constant();
@@ -133,16 +133,19 @@ public class MainButtons {
             }
             String str = sb.toString();
             token = str.trim().split("\\s+");
-            dept = new int[token.length];
+            dept = new double[token.length];
             Grid = new JButton[dept.length];
-            gasVolume = new int[dept.length];
+            gasVolume = new double[dept.length];
             PercenGas = new double[dept.length];
+
             int fluid = Integer.parseInt(textField.getText().trim());
+
             calculateDepth(dept, token, fluid);
             legendPanel.addGrid(Grid, PercenGas);
             legendPanel.getPanelGrid().revalidate();
             legendPanel.getPanelGrid().repaint();
 
+            System.out.println(PercenGas[0]);
         } catch (FileNotFoundException e) {
             JOptionPane.showMessageDialog(null,
                     "File Not Found",
@@ -156,23 +159,23 @@ public class MainButtons {
         return Grid.length;
     }
 
-    public int getGasVolume(int dept, int Fluid) {
-        int topHorizon = dept - 200;
-        int minDept = Math.min(Fluid, dept);
+    public double getGasVolume(double dept, double Fluid) {
+        double topHorizon = dept - 200;
+        double minDept = Math.min(Fluid, dept);
         if (Fluid <= topHorizon) return 0;
-        int GasVolume = con.WidthY * con.LengthX * (minDept - (topHorizon));
+        double GasVolume = con.WidthY * con.LengthX * (minDept - (topHorizon));
         return GasVolume;
     }
 
-    public double getPercen(int dept, int fluid) {
-        int topHorizon = dept - 200;
-        int totalGas = dept - topHorizon;
+    public double getPercen(double dept, double fluid) {
+        double topHorizon = dept - 200;
+        double totalGas = dept - topHorizon;
         if (totalGas <= 0) return 0;
         double GasVolume = Math.max(0, Math.min(fluid, dept) - topHorizon);
         return (GasVolume / totalGas) * 100;
     }
 
-    public void calculateDepth(int[] dept, String[] token, int fluid) {
+    public void calculateDepth(double[] dept, String[] token, double fluid) {
         for (int i = 0; i < token.length; i++) {
             dept[i] = Integer.parseInt(token[i]);
             gasVolume[i] = getGasVolume(dept[i], fluid);
@@ -181,10 +184,10 @@ public class MainButtons {
             Grid[i].setFocusable(false);
         }
     }
-    public int[] getRowColumGrid(File file){
+
+    public int[] getRowColumGrid(File file) {
         try {
             BufferedReader readFile = new BufferedReader(new FileReader(file));
-            Scanner scanner = new Scanner(file);
             StringBuilder sb = new StringBuilder();
             String line;
             while ((line = readFile.readLine()) != null) {

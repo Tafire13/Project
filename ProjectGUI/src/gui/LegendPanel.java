@@ -93,6 +93,7 @@ public class LegendPanel {
         } else {
             this.panelGrid.setLayout(new GridLayout(1, 1)); // default layout
         }
+
         this.panelGrid.setBorder(new LineBorder(themeColors.black, 2));
     }
 
@@ -143,12 +144,12 @@ public class LegendPanel {
     public void addGrid(JButton[] button, double[] Percen) {
         panelGrid.removeAll();
         for (int i = 0; i < button.length; i++) {
-            if (Percen[i] == 0) {
-                button[i].setBackground(themeColors.red);
-            } else if (Percen[i]<= 50) {
+            if (Percen[i] >= 50.0) {
+                button[i].setBackground(themeColors.brightGreen);
+            } else if (Percen[i]<= 50.0 && Percen[i] > 0.0) {
                 button[i].setBackground(themeColors.brightYellow);
             } else {
-                button[i].setBackground(themeColors.brightGreen);
+                button[i].setBackground(themeColors.red);
             }
             panelGrid.add(button[i]);
         }
