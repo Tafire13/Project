@@ -5,6 +5,7 @@ import manage.ThemeColors;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.io.*;
 
 public class LegendPanel {
     private JPanel leftPanel;
@@ -16,6 +17,7 @@ public class LegendPanel {
     private JPanel fileControlPanel;
     ThemeColors themeColors = new ThemeColors();
     private MainButtons mainButtons;
+
     private JButton[] Grid;
 
     public LegendPanel() {
@@ -27,6 +29,8 @@ public class LegendPanel {
         SouthPanal = new JPanel();
         fileControlPanel = new JPanel();
 
+        mainButtons = new MainButtons(this);
+
         setLeftPanel(leftPanel);
         setRightPanel(RightPanel);
         setPanelGridInfo(panelGridInfo);
@@ -34,7 +38,6 @@ public class LegendPanel {
         setSouthPanal(SouthPanal);
         setPanelGrid(panelGrid);
         setFileControlPanel(fileControlPanel);
-        mainButtons = new MainButtons(this);
 
         addInfoGrid();
         addInfoData();
@@ -83,9 +86,16 @@ public class LegendPanel {
     public void setPanelGrid(JPanel panelGrid) {
         this.panelGrid.setPreferredSize(new Dimension(840, 440));
         this.panelGrid.setBackground(themeColors.white);
-        this.panelGrid.setLayout(new GridLayout(10, 20));
+        File file = mainButtons.getLoadFile();
+        if (file != null) {
+            int[] rc = mainButtons.getRowColumGrid(file);
+            this.panelGrid.setLayout(new GridLayout(rc[0], rc[1]));
+        } else {
+            this.panelGrid.setLayout(new GridLayout(1, 1)); // default layout
+        }
         this.panelGrid.setBorder(new LineBorder(themeColors.black, 2));
     }
+
 
     public JPanel getDataPanel() {
         return dataPanel;
@@ -143,4 +153,5 @@ public class LegendPanel {
             panelGrid.add(button[i]);
         }
     }
+
 }

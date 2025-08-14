@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.*;
 import java.time.Period;
+import java.util.Scanner;
 
 public class MainButtons {
     private LegendPanel legendPanel;
@@ -22,6 +23,7 @@ public class MainButtons {
     private String[] token;
     ThemeColors themeColors = new ThemeColors();
     constant con = new constant();
+    private File loadFile;
 
     public MainButtons(LegendPanel legendPanel) {
         this.legendPanel = legendPanel;
@@ -82,11 +84,18 @@ public class MainButtons {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setCurrentDirectory(new File("src"));
         if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = fileChooser.getSelectedFile();
-            setCalculateDept(selectedFile);
+            File loadFile = fileChooser.getSelectedFile();
+            setCalculateDept(loadFile);
+
+            int[] rc = getRowColumGrid(loadFile);
+            legendPanel.getPanelGrid().setLayout(new GridLayout(rc[0], rc[1]));
+            legendPanel.getPanelGrid().revalidate();
+            legendPanel.getPanelGrid().repaint();
         }
+    }
 
-
+    public File getLoadFile() {
+        return loadFile;
     }
 
     public void clickCalculate() {
@@ -171,5 +180,29 @@ public class MainButtons {
             Grid[i] = new JButton(String.valueOf(PercenGas[i]));
             Grid[i].setFocusable(false);
         }
+    }
+    public int[] getRowColumGrid(File file){
+        try {
+            BufferedReader readFile = new BufferedReader(new FileReader(file));
+            Scanner scanner = new Scanner(file);
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = readFile.readLine()) != null) {
+                sb.append(line).append("\n");
+            }
+            String str = sb.toString();
+            String[] lines = str.split("\n");
+            int rows = lines.length;
+            String[] colsInFirstRow = str.split(" ");
+            int cols = colsInFirstRow.length;
+            return new int[]{rows, cols};
+        } catch (FileNotFoundException e) {
+            JOptionPane.showMessageDialog(null,
+                    "File Not Found",
+                    "File Not Found",
+                    JOptionPane.ERROR_MESSAGE);
+        } catch (IOException e) {
+        }
+        return new int[]{0};
     }
 }
