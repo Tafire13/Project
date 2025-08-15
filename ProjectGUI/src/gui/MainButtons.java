@@ -14,6 +14,7 @@ public class MainButtons {
     private JButton Calculate;
     private JButton OpenFile;
     private JButton Back;
+    private JButton About;
     private JButton Credit;
     private JTextField textField;
     private JButton[] Grid;
@@ -31,6 +32,17 @@ public class MainButtons {
         setTextField();
         setCalculate(Calculate);
         setOpenFile();
+    }
+    public JButton getAboutButton() {
+        About = new JButton("About");
+        About.setPreferredSize(new Dimension(300, 30));
+        About.setBackground(themeColors.red);
+        About.setFocusable(false);
+        About.addActionListener(e -> {
+            legendPanel.getSouthPanal().setVisible(false);
+            new AboutFrame();
+        });
+        return About;
     }
 
     public void setTextField() {

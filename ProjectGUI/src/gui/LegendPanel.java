@@ -107,6 +107,7 @@ public class LegendPanel {
         this.SouthPanal.setBackground(themeColors.salmonPink);
         this.SouthPanal.setBorder(new LineBorder(Color.BLACK, 2));
         this.SouthPanal.setLayout(new FlowLayout(FlowLayout.CENTER, 30, 30));
+        this.SouthPanal.add(mainButtons.getAboutButton());
     }
 
     public JPanel getSouthPanal() {
