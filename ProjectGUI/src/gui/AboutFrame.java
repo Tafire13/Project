@@ -37,6 +37,6 @@ public class AboutFrame extends JFrame {
     }
 
     public static void main(String[] args) {
-        new AboutFrame();
+      
     }
 }

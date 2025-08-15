@@ -22,5 +22,7 @@ public class MainFrame extends JFrame {
         add(legendPanel.getRightPanel(), BorderLayout.EAST);
         add(legendPanel.getSouthPanal(), BorderLayout.SOUTH);
     }
-
+    public static void main(String[] args) {
+        new MainFrame().setVisible(true);
+    }
 }
