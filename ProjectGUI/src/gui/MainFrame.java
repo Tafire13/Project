@@ -3,8 +3,7 @@ package gui;
 import javax.swing.JFrame;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.*;
 
 import manage.constant;
 import manage.ThemeColors;
@@ -31,9 +30,10 @@ public class MainFrame extends JFrame {
 
     public JButton getAboutButton() {
         JButton About = new JButton("About");
-        About.setPreferredSize(new Dimension(300, 30));
-        About.setBackground(ThemeColors.red);
+        About.setPreferredSize(new Dimension(300, 50));
+        About.setBackground(ThemeColors.pinkkie);
         About.setFocusable(false);
+        About.setFont(new Font("" ,0,20));
         About.addActionListener(e -> {
             dispose();
             new AboutFrame();

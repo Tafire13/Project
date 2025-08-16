@@ -27,7 +27,7 @@ public class ThemeColors {
     public static final Color darkOrange = new Color(255, 140, 0);
     public static final Color deepSkyBlue = new Color(0, 191, 255);
 
-    public static final Color hotPink = new Color(255, 20, 147);
+    public static final Color hotPink = new Color(255, 152, 210);
     public static final Color aquaMarine = new Color(64, 224, 208);
     public static final Color tealGreen = new Color(32, 178, 170);
     public static final Color orchidPurple = new Color(218, 112, 214);
@@ -59,4 +59,10 @@ public class ThemeColors {
     public static final Color brightTurquoise = new Color(0, 245, 255);
     public static final Color vividIndigo = new Color(138, 43, 226);
     public static final Color eiei = new Color(196, 174, 255);
+
+    public static final Color pinkkie = new Color(244, 155, 171);
+    public static final Color purpie = new Color(155, 126, 189);
+    public static final Color greenny = new Color(184, 239, 191);
+    public static final Color skylie = new Color(158, 198, 243);
+    public static final Color bluegie =  new Color(159, 179, 223);
 }
