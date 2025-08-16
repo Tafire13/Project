@@ -2,12 +2,9 @@ package gui;
 
 import manage.ThemeColors;
 
-import javax.swing.JPanel;
-import javax.swing.JButton;
+import javax.swing.*;
 import javax.swing.border.LineBorder;
-import java.awt.FlowLayout;
-import java.awt.Dimension;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.io.File;
 
 public class LegendPanel {
@@ -43,6 +40,7 @@ public class LegendPanel {
 
         addInfoGrid();
         addInfoData();
+        BoxColorGas(GasBoxPanel(), textPercenGas());
         fileControl();
     }
 
@@ -148,7 +146,7 @@ public class LegendPanel {
         for (int i = 0; i < GasBox.length; i++) {
             if (Percen[i] >= 50.0) {
                 GasBox[i].setBackground(ThemeColors.brightGreen);
-            } else if (Percen[i]<= 50.0 && Percen[i] > 0.0) {
+            } else if (Percen[i] <= 50.0 && Percen[i] > 0.0) {
                 GasBox[i].setBackground(ThemeColors.brightYellow);
             } else {
                 GasBox[i].setBackground(ThemeColors.red);
@@ -157,4 +155,36 @@ public class LegendPanel {
         }
     }
 
+    public JPanel[] GasBoxPanel() {
+        JPanel[] box = new JPanel[3];
+        for (int i = 0; i < box.length; i++) {
+            box[i] = new JPanel();
+            box[i].setPreferredSize(new Dimension(60, 60));
+        }
+        box[0].setBackground(ThemeColors.red);
+        box[1].setBackground(ThemeColors.brightYellow);
+        box[2].setBackground(ThemeColors.brightGreen);
+        return box;
+    }
+
+    public void BoxColorGas(JPanel[] box, JLabel[] Percen) {
+        dataPanel.setLayout(new BoxLayout(dataPanel, BoxLayout.Y_AXIS));
+        for (int i = 0; i < box.length; i++) {
+            JPanel row = new JPanel();
+            row.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 30));
+            row.add(box[i]);
+            row.add(Percen[i]);
+            dataPanel.add(row);
+        }
+    }
+    public JLabel[] textPercenGas(){
+        JLabel[] Percen = new JLabel[3];
+        Percen[0] = new JLabel(" = 0%");
+        Percen[1] = new JLabel(" < 50%");
+        Percen[2] = new JLabel(" >= 50%");
+        for (int i = 0; i < Percen.length; i++) {
+            Percen[i].setFont(new Font(null, Font.PLAIN, 36));
+        }
+        return Percen;
+    }
 }
