@@ -5,7 +5,10 @@ import manage.ThemeColors;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
+import java.text.DecimalFormat;
 
 public class LegendPanel {
     private JPanel leftPanel;
@@ -16,7 +19,7 @@ public class LegendPanel {
     private JPanel SouthPanal;
     private JPanel fileControlPanel;
     private MainButtons mainButtons;
-
+    private JLabel detailButton;
     private JButton[] Grid;
 
     public LegendPanel() {
@@ -46,7 +49,7 @@ public class LegendPanel {
 
     public void setLeftPanel(JPanel leftPanel) {
         this.leftPanel.setPreferredSize(new Dimension(1050, 100));
-        this.leftPanel.setBackground(ThemeColors.salmonPink);
+        this.leftPanel.setBackground(ThemeColors.purpie);
         this.leftPanel.setBorder(new LineBorder(ThemeColors.black, 2));
         this.leftPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 30, 30));
     }
@@ -58,7 +61,7 @@ public class LegendPanel {
     public void setRightPanel(JPanel RightPanel) {
         this.RightPanel.setPreferredSize(new Dimension(350, 100));
         this.RightPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 40, 30));
-        this.RightPanel.setBackground(ThemeColors.salmonPink);
+        this.RightPanel.setBackground(ThemeColors.purpie);
         this.RightPanel.setBorder(new LineBorder(ThemeColors.black, 2));
     }
 
@@ -104,9 +107,9 @@ public class LegendPanel {
 
     public void setSouthPanal(JPanel leftPanel) {
         this.SouthPanal.setPreferredSize(new Dimension(900, 100));
-        this.SouthPanal.setBackground(ThemeColors.salmonPink);
+        this.SouthPanal.setBackground(ThemeColors.purpie);
         this.SouthPanal.setBorder(new LineBorder(ThemeColors.black, 2));
-        this.SouthPanal.setLayout(new FlowLayout(FlowLayout.CENTER, 30, 30));
+        this.SouthPanal.setLayout(new FlowLayout(FlowLayout.RIGHT, 30, 30));
     }
 
     public JPanel getSouthPanal() {
@@ -132,6 +135,7 @@ public class LegendPanel {
 
     public void addInfoGrid() {
         leftPanel.add(panelGridInfo);
+        leftPanel.add(detail());
         panelGridInfo.add(panelGrid);
     }
 
@@ -152,8 +156,33 @@ public class LegendPanel {
             } else {
                 GasBox[i].setBackground(ThemeColors.red);
             }
+            double per =  Percen[i];
+            int cell = i;
+            GasBox[i].addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    DecimalFormat df = new DecimalFormat("#,##0.00");
+                    GasBox[cell].setBorder(new LineBorder(Color.WHITE,3));
+                    double vom = MainButtons.gasVolume[cell];
+                    detailButton.setFont(new Font("" ,0,20));
+                    detailButton.setText("Percen = "+df.format(per)+"%    volume = "+df.format(vom));
+
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    GasBox[cell].setBorder(new LineBorder(Color.black));
+                    detailButton.setText("");
+                }
+
+            });
+
+
+
             panelGrid.add(GasBox[i]);
+
         }
+
     }
 
     public JPanel[] GasBoxPanel() {
@@ -187,5 +216,26 @@ public class LegendPanel {
             Percen[i].setFont(new Font(null, Font.PLAIN, 36));
         }
         return Percen;
+    }
+
+    public JPanel detail() {
+        JPanel detailPanel = new JPanel();
+        detailPanel.setBackground(ThemeColors.purpie);
+        detailPanel.setPreferredSize(new Dimension(1000,100));
+
+        ImageIcon pic = new ImageIcon(getClass().getResource("/image/proLogo.PNG"));
+        Image scaled = pic.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        JLabel iconLabel = new JLabel(new ImageIcon(scaled));
+
+        detailPanel.add(iconLabel);
+        detailPanel.add(labelDetail());
+
+        return detailPanel;
+    }
+
+    public JLabel labelDetail() {
+        detailButton = new JLabel("Hover For info.");
+        detailButton.setFont(new Font("" ,0,20));
+        return detailButton;
     }
 }

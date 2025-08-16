@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 
 public class MainButtons {
+    public static double getPercen;
     private LegendPanel legendPanel;
     private JButton Calculate;
     private JButton OpenFile;
@@ -26,10 +27,11 @@ public class MainButtons {
     private JTextField textField;
     private JPanel[] Grid;
     private double[] PercenGas;
-    public double[] gasVolume;
+    public static double[] gasVolume;
     private double[] dept;
     private String[] token;
     private File loadFile;
+    public boolean testmode = true;
 
     public MainButtons(LegendPanel legendPanel) {
         this.legendPanel = legendPanel;
@@ -53,7 +55,7 @@ public class MainButtons {
     public void setOpenFile() {
         OpenFile = new JButton("Open File");
         OpenFile.setPreferredSize(new Dimension(250, 30));
-        OpenFile.setBackground(ThemeColors.brightTurquoise);
+        OpenFile.setBackground(ThemeColors.skylie);
         OpenFile.setFocusable(false);
         OpenFile.addActionListener(e -> {
             clickOpenFile();
@@ -68,7 +70,7 @@ public class MainButtons {
         Calculate = new JButton("Calculate");
         Calculate.setFocusable(false);
         Calculate.setPreferredSize(new Dimension(250, 30));
-        Calculate.setBackground(ThemeColors.brightLime);
+        Calculate.setBackground(ThemeColors.greenny);
         Calculate.addActionListener(e -> {
             if (token != null && Grid != null && PercenGas != null) {
                 clickCalculate();
@@ -88,7 +90,12 @@ public class MainButtons {
 
     public void clickOpenFile() {
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setCurrentDirectory(new File("src"));
+        if (testmode){
+            fileChooser.setCurrentDirectory(new File("D:\\OOP-GUI\\ProjectGUI\\src"));
+        }else{
+            fileChooser.setCurrentDirectory(new File("src"));
+        }
+
         if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
             File loadFile = fileChooser.getSelectedFile();
             setCalculateDept(loadFile);

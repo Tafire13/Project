@@ -8,11 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
-import java.awt.Font;
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.Dimension;
-import java.awt.Image;
+import java.awt.*;
 
 public class aboutPanel {
     private JPanel topPanel;
@@ -134,9 +130,9 @@ public class aboutPanel {
 
     public void setBackButton() {
         this.backButton = new JButton("Back");
-        backButton.setPreferredSize(new Dimension(100, 50));
+        backButton.setPreferredSize(new Dimension(300, 50));
         backButton.setFocusable(false);
-        backButton.setBackground(ThemeColors.red);
+        backButton.setBackground(ThemeColors.pinkkie);
     }
 
     public JButton getBackButton() {
