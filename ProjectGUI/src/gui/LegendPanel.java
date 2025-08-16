@@ -2,10 +2,13 @@ package gui;
 
 import manage.ThemeColors;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JButton;
 import javax.swing.border.LineBorder;
-import java.awt.*;
-import java.io.*;
+import java.awt.FlowLayout;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.io.File;
 
 public class LegendPanel {
     private JPanel leftPanel;
@@ -15,7 +18,6 @@ public class LegendPanel {
     private JPanel panelGrid;
     private JPanel SouthPanal;
     private JPanel fileControlPanel;
-    ThemeColors themeColors = new ThemeColors();
     private MainButtons mainButtons;
 
     private JButton[] Grid;
@@ -45,9 +47,9 @@ public class LegendPanel {
     }
 
     public void setLeftPanel(JPanel leftPanel) {
-        this.leftPanel.setPreferredSize(new Dimension(900, 100));
-        this.leftPanel.setBackground(themeColors.salmonPink);
-        this.leftPanel.setBorder(new LineBorder(Color.BLACK, 2));
+        this.leftPanel.setPreferredSize(new Dimension(1050, 100));
+        this.leftPanel.setBackground(ThemeColors.salmonPink);
+        this.leftPanel.setBorder(new LineBorder(ThemeColors.black, 2));
         this.leftPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 30, 30));
     }
 
@@ -56,10 +58,10 @@ public class LegendPanel {
     }
 
     public void setRightPanel(JPanel RightPanel) {
-        this.RightPanel.setPreferredSize(new Dimension(500, 100));
-        this.RightPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 50, 30));
-        this.RightPanel.setBackground(themeColors.salmonPink);
-        this.RightPanel.setBorder(new LineBorder(Color.BLACK, 2));
+        this.RightPanel.setPreferredSize(new Dimension(350, 100));
+        this.RightPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 40, 30));
+        this.RightPanel.setBackground(ThemeColors.salmonPink);
+        this.RightPanel.setBorder(new LineBorder(ThemeColors.black, 2));
     }
 
     public JPanel getRightPanel() {
@@ -67,16 +69,16 @@ public class LegendPanel {
     }
 
     public void setPanelGridInfo(JPanel panelGridInfo) {
-        this.panelGridInfo.setPreferredSize(new Dimension(850, 450));
-        this.panelGridInfo.setBackground(themeColors.white);
+        this.panelGridInfo.setPreferredSize(new Dimension(1000, 500));
+        this.panelGridInfo.setBackground(ThemeColors.white);
         this.panelGridInfo.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 2));
-        this.panelGridInfo.setBorder(new LineBorder(Color.BLACK, 2));
+        this.panelGridInfo.setBorder(new LineBorder(ThemeColors.black, 2));
     }
 
     public void setDataPanel(JPanel dataPanel) {
-        this.dataPanel.setPreferredSize(new Dimension(400, 400));
-        this.dataPanel.setBackground(themeColors.white);
-        this.dataPanel.setBorder(new LineBorder(themeColors.black, 2));
+        this.dataPanel.setPreferredSize(new Dimension(280, 350));
+        this.dataPanel.setBackground(ThemeColors.white);
+        this.dataPanel.setBorder(new LineBorder(ThemeColors.black, 2));
     }
 
     public JPanel getPanelGridInfo() {
@@ -84,17 +86,17 @@ public class LegendPanel {
     }
 
     public void setPanelGrid(JPanel panelGrid) {
-        this.panelGrid.setPreferredSize(new Dimension(840, 440));
-        this.panelGrid.setBackground(themeColors.white);
+        this.panelGrid.setPreferredSize(new Dimension(990, 490));
+        this.panelGrid.setBackground(ThemeColors.white);
         File file = mainButtons.getLoadFile();
         if (file != null) {
             int[] rc = mainButtons.getRowColumGrid(file);
             this.panelGrid.setLayout(new GridLayout(rc[0], rc[1]));
         } else {
-            this.panelGrid.setLayout(new GridLayout(1, 1)); // default layout
+            this.panelGrid.setLayout(new GridLayout(1, 1));
         }
 
-        this.panelGrid.setBorder(new LineBorder(themeColors.black, 2));
+        this.panelGrid.setBorder(new LineBorder(ThemeColors.black, 2));
     }
 
 
@@ -104,10 +106,9 @@ public class LegendPanel {
 
     public void setSouthPanal(JPanel leftPanel) {
         this.SouthPanal.setPreferredSize(new Dimension(900, 100));
-        this.SouthPanal.setBackground(themeColors.salmonPink);
-        this.SouthPanal.setBorder(new LineBorder(Color.BLACK, 2));
+        this.SouthPanal.setBackground(ThemeColors.salmonPink);
+        this.SouthPanal.setBorder(new LineBorder(ThemeColors.black, 2));
         this.SouthPanal.setLayout(new FlowLayout(FlowLayout.CENTER, 30, 30));
-        this.SouthPanal.add(mainButtons.getAboutButton());
     }
 
     public JPanel getSouthPanal() {
@@ -116,10 +117,10 @@ public class LegendPanel {
 
     public void setFileControlPanel(JPanel fileControlPanel) {
         this.fileControlPanel = fileControlPanel;
-        this.fileControlPanel.setPreferredSize(new Dimension(400, 170));
-        this.fileControlPanel.setBackground(themeColors.white);
-        this.fileControlPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 40, 10));
-        this.fileControlPanel.setBorder(new LineBorder(themeColors.black, 2));
+        this.fileControlPanel.setPreferredSize(new Dimension(280, 170));
+        this.fileControlPanel.setBackground(ThemeColors.white);
+        this.fileControlPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 15, 10));
+        this.fileControlPanel.setBorder(new LineBorder(ThemeColors.black, 2));
     }
 
     public JPanel getPanelGrid() {
@@ -142,17 +143,17 @@ public class LegendPanel {
         fileControlPanel.add(mainButtons.getOpenFile());
     }
 
-    public void addGrid(JButton[] button, double[] Percen) {
+    public void addGrid(JPanel[] GasBox, double[] Percen) {
         panelGrid.removeAll();
-        for (int i = 0; i < button.length; i++) {
+        for (int i = 0; i < GasBox.length; i++) {
             if (Percen[i] >= 50.0) {
-                button[i].setBackground(themeColors.brightGreen);
+                GasBox[i].setBackground(ThemeColors.brightGreen);
             } else if (Percen[i]<= 50.0 && Percen[i] > 0.0) {
-                button[i].setBackground(themeColors.brightYellow);
+                GasBox[i].setBackground(ThemeColors.brightYellow);
             } else {
-                button[i].setBackground(themeColors.red);
+                GasBox[i].setBackground(ThemeColors.red);
             }
-            panelGrid.add(button[i]);
+            panelGrid.add(GasBox[i]);
         }
     }
 

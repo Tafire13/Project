@@ -3,14 +3,18 @@ package gui;
 import manage.ThemeColors;
 import manage.constant;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JButton;
 import javax.swing.border.LineBorder;
-import java.awt.*;
+import java.awt.Font;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.Dimension;
+import java.awt.Image;
 
 public class aboutPanel {
-    constant con = new constant();
-    ThemeColors themeColors = new ThemeColors();
-
     private JPanel topPanel;
     private JPanel buttomPanel;
     private JPanel centerPanel;
@@ -43,7 +47,7 @@ public class aboutPanel {
     public void setTopPanel() {
         this.topPanel = new JPanel();
         this.topPanel.setPreferredSize(new Dimension(100, 100));
-        this.topPanel.setBackground(themeColors.white);
+        this.topPanel.setBackground(ThemeColors.white);
         this.topPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 20));
     }
 
@@ -54,8 +58,8 @@ public class aboutPanel {
     public void setBottomLabel() {
         this.buttomPanel = new JPanel();
         this.buttomPanel.setPreferredSize(new Dimension(100, 100));
-        this.buttomPanel.setBorder(new LineBorder(themeColors.black, 2));
-        this.buttomPanel.setBackground(themeColors.white);
+        this.buttomPanel.setBorder(new LineBorder(ThemeColors.black, 2));
+        this.buttomPanel.setBackground(ThemeColors.white);
         this.buttomPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 50, 25));
     }
 
@@ -65,7 +69,7 @@ public class aboutPanel {
 
     public void setCenterPanel() {
         this.centerPanel = new JPanel();
-        this.centerPanel.setBorder(new LineBorder(themeColors.black, 2));
+        this.centerPanel.setBorder(new LineBorder(ThemeColors.black, 2));
         this.centerPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 25));
     }
 
@@ -78,9 +82,9 @@ public class aboutPanel {
         for (int i = 0; i < 3; i++) {
             this.imagePanel[i] = new JPanel();
             this.imagePanel[i].setPreferredSize(new Dimension(300, 500));
-            this.imagePanel[i].setBorder(new LineBorder(themeColors.black, 2));
+            this.imagePanel[i].setBorder(new LineBorder(ThemeColors.black, 2));
             this.imagePanel[i].setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
-            this.imagePanel[i].setBackground(themeColors.white);
+            this.imagePanel[i].setBackground(ThemeColors.white);
         }
     }
 
@@ -117,7 +121,7 @@ public class aboutPanel {
     public void setDataLabel() {
         this.DataLabel = new JLabel[3];
         for (int i = 0; i < DataLabel.length; i++) {
-            DataLabel[i] = new JLabel("<html>Name : " + con.name[i] + "<br> SID : " + con.SID[i] + "</html>");
+            DataLabel[i] = new JLabel("<html>Name : " + constant.name[i] + "<br> SID : " + constant.SID[i] + "</html>");
             DataLabel[i].setFont(new Font("TH Sarabun New", Font.PLAIN, 32));
         }
     }
@@ -132,7 +136,7 @@ public class aboutPanel {
         this.backButton = new JButton("Back");
         backButton.setPreferredSize(new Dimension(100, 50));
         backButton.setFocusable(false);
-        backButton.setBackground(themeColors.red);
+        backButton.setBackground(ThemeColors.red);
     }
 
     public JButton getBackButton() {

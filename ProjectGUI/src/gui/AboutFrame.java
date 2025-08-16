@@ -1,12 +1,12 @@
 package gui;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.BorderLayout;
+import javax.swing.JFrame;
+import javax.swing.JButton;
 
 import manage.ThemeColors;
 
 public class AboutFrame extends JFrame {
-    private ThemeColors themeColors = new ThemeColors();
     private aboutPanel AboutPanel;
     public AboutFrame() {
         AboutPanel = new aboutPanel();
@@ -16,7 +16,7 @@ public class AboutFrame extends JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setLayout(new BorderLayout());
-        getContentPane().setBackground(new Color(255, 230, 230));
+        getContentPane().setBackground(ThemeColors.white);
         addComponentAbout();
         setVisible(true);
         clickBackButton(AboutPanel.getBackButton());
@@ -34,9 +34,5 @@ public class AboutFrame extends JFrame {
             setVisible(false);
             new MainFrame().setVisible(true);
         });
-    }
-
-    public static void main(String[] args) {
-      
     }
 }

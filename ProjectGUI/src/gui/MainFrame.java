@@ -1,13 +1,16 @@
 package gui;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JButton;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+
 import manage.constant;
+import manage.ThemeColors;
 
 
 
 public class MainFrame extends JFrame {
-    constant constant = new constant();
     LegendPanel legendPanel = new LegendPanel();
     public MainFrame(){
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -21,8 +24,17 @@ public class MainFrame extends JFrame {
         add(legendPanel.getLeftPanel(), BorderLayout.WEST);
         add(legendPanel.getRightPanel(), BorderLayout.EAST);
         add(legendPanel.getSouthPanal(), BorderLayout.SOUTH);
+        legendPanel.getSouthPanal().add(getAboutButton());
     }
-    public static void main(String[] args) {
-        new MainFrame().setVisible(true);
+    public JButton getAboutButton() {
+        JButton About = new JButton("About");
+        About.setPreferredSize(new Dimension(300, 30));
+        About.setBackground(ThemeColors.red);
+        About.setFocusable(false);
+        About.addActionListener(e -> {
+            dispose();
+            new AboutFrame();
+        });
+        return About;
     }
 }

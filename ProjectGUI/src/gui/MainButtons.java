@@ -4,10 +4,16 @@ import manage.ThemeColors;
 import manage.constant;
 
 import javax.swing.*;
-import java.awt.*;
-import java.io.*;
-import java.time.Period;
-import java.util.Scanner;
+import javax.swing.border.LineBorder;
+import java.awt.Dimension;
+import java.awt.Color;
+import java.awt.GridLayout;
+import java.io.File;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.text.DecimalFormat;
 
 public class MainButtons {
     private LegendPanel legendPanel;
@@ -17,12 +23,11 @@ public class MainButtons {
     private JButton About;
     private JButton Credit;
     private JTextField textField;
-    private JButton[] Grid;
+    private JPanel[] Grid;
     private double[] PercenGas;
     public double[] gasVolume;
     private double[] dept;
     private String[] token;
-    ThemeColors themeColors = new ThemeColors();
     constant con = new constant();
     private File loadFile;
 
@@ -33,21 +38,10 @@ public class MainButtons {
         setCalculate(Calculate);
         setOpenFile();
     }
-    public JButton getAboutButton() {
-        About = new JButton("About");
-        About.setPreferredSize(new Dimension(300, 30));
-        About.setBackground(themeColors.red);
-        About.setFocusable(false);
-        About.addActionListener(e -> {
-            legendPanel.getSouthPanal().setVisible(false);
-            new AboutFrame();
-        });
-        return About;
-    }
 
     public void setTextField() {
         textField = new JTextField("2500");
-        textField.setPreferredSize(new Dimension(300, 30));
+        textField.setPreferredSize(new Dimension(250, 30));
         textField.setCaretColor(new Color(0, 0, 0, 0));
         textField.setHorizontalAlignment(JTextField.CENTER);
     }
@@ -58,8 +52,8 @@ public class MainButtons {
 
     public void setOpenFile() {
         OpenFile = new JButton("Open File");
-        OpenFile.setPreferredSize(new Dimension(300, 30));
-        OpenFile.setBackground(themeColors.brightTurquoise);
+        OpenFile.setPreferredSize(new Dimension(250, 30));
+        OpenFile.setBackground(ThemeColors.brightTurquoise);
         OpenFile.setFocusable(false);
         OpenFile.addActionListener(e -> {
             clickOpenFile();
@@ -73,8 +67,8 @@ public class MainButtons {
     public void setCalculate(JButton calculate) {
         Calculate = new JButton("Calculate");
         Calculate.setFocusable(false);
-        Calculate.setPreferredSize(new Dimension(300, 30));
-        Calculate.setBackground(themeColors.brightLime);
+        Calculate.setPreferredSize(new Dimension(250, 30));
+        Calculate.setBackground(ThemeColors.brightLime);
         Calculate.addActionListener(e -> {
             if (token != null && Grid != null && PercenGas != null) {
                 clickCalculate();
@@ -146,7 +140,7 @@ public class MainButtons {
             String str = sb.toString();
             token = str.trim().split("\\s+");
             dept = new double[token.length];
-            Grid = new JButton[dept.length];
+            Grid = new JPanel[dept.length];
             gasVolume = new double[dept.length];
             PercenGas = new double[dept.length];
 
@@ -192,7 +186,10 @@ public class MainButtons {
             dept[i] = Integer.parseInt(token[i]);
             gasVolume[i] = getGasVolume(dept[i], fluid);
             PercenGas[i] = getPercen(dept[i], fluid);
-            Grid[i] = new JButton(String.valueOf(PercenGas[i]));
+            DecimalFormat df = new DecimalFormat("#0.0");
+            Grid[i] = new JPanel();
+            Grid[i].setBorder(new LineBorder(ThemeColors.black, 1));
+            Grid[i].add(new JLabel(df.format(PercenGas[i]) + "%"));
             Grid[i].setFocusable(false);
         }
     }
