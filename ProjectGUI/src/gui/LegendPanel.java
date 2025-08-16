@@ -139,6 +139,7 @@ public class LegendPanel {
         fileControlPanel.add(mainButtons.getTextField());
         fileControlPanel.add(mainButtons.getCalculate());
         fileControlPanel.add(mainButtons.getOpenFile());
+        fileControlPanel.add(mainButtons.clearButton());
     }
 
     public void addGrid(JPanel[] GasBox, double[] Percen) {

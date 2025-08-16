@@ -8,6 +8,7 @@ import javax.swing.border.LineBorder;
 import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -225,5 +226,33 @@ public class MainButtons {
                 token[i] = "0";
             }
         }
+    }
+
+    public JButton clearButton() {
+        JButton clear = new JButton("Clear File");
+        clear.setPreferredSize(new Dimension(250, 30));
+        clear.setBackground(ThemeColors.hotPink);
+        clear.setFocusable(false);
+        clear.addActionListener(e -> {
+            token = null;
+            dept = null;
+            gasVolume = null;
+            PercenGas = null;
+            Grid = null;
+            loadFile = null;
+
+            textField.setText("2500"); // รีเซ็ตค่า input กลับไปค่า default
+
+            // ลบ Grid ออกจากหน้าจอ
+            legendPanel.getPanelGrid().removeAll();
+            legendPanel.getPanelGrid().revalidate();
+            legendPanel.getPanelGrid().repaint();
+
+            JOptionPane.showMessageDialog(null,
+                    "Data has been cleared.",
+                    "Clear Complete",
+                    JOptionPane.INFORMATION_MESSAGE);
+        });
+        return clear;
     }
 }
