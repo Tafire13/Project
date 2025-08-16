@@ -89,9 +89,9 @@ public class LegendPanel {
         File file = mainButtons.getLoadFile();
         if (file != null) {
             int[] rc = mainButtons.getRowColumGrid(file);
-            this.panelGrid.setLayout(new GridLayout(rc[0], rc[1]));
+            this.panelGrid.setLayout(new GridLayout(rc[0], rc[1], 1 ,1));
         } else {
-            this.panelGrid.setLayout(new GridLayout(1, 1));
+            this.panelGrid.setLayout(new GridLayout(1, 1 , 1,1));
         }
 
         this.panelGrid.setBorder(new LineBorder(ThemeColors.black, 2));

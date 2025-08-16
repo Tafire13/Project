@@ -139,6 +139,7 @@ public class MainButtons {
             }
             String str = sb.toString();
             token = str.trim().split("\\s+");
+
             dept = new double[token.length];
             Grid = new JPanel[dept.length];
             gasVolume = new double[dept.length];
@@ -183,10 +184,11 @@ public class MainButtons {
 
     public void calculateDepth(double[] dept, String[] token, double fluid) {
         for (int i = 0; i < token.length; i++) {
-            dept[i] = Integer.parseInt(token[i]);
+            checkAlphabet(token);
+            dept[i] = Double.parseDouble(token[i]);
             gasVolume[i] = getGasVolume(dept[i], fluid);
             PercenGas[i] = getPercen(dept[i], fluid);
-            DecimalFormat df = new DecimalFormat("#0.0");
+            DecimalFormat df = new DecimalFormat("#0.##");
             Grid[i] = new JPanel();
             Grid[i].setBorder(new LineBorder(ThemeColors.black, 1));
             Grid[i].add(new JLabel(df.format(PercenGas[i]) + "%"));
@@ -216,5 +218,17 @@ public class MainButtons {
         } catch (IOException e) {
         }
         return new int[]{0};
+    }
+
+    public void checkAlphabet(String[] token) {
+        for (int i = 0; i < token.length; i++) {
+            if (token[i].matches("[a-zA-Z]+")) {
+                token[i] = "0";
+            } else if (token[i].equalsIgnoreCase("-infinity")) {
+                token[i] = "0";
+            } else if (token[i].equalsIgnoreCase("infinity")) {
+                token[i] = "0";
+            }
+        }
     }
 }
