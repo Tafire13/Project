@@ -28,7 +28,6 @@ public class MainButtons {
     public double[] gasVolume;
     private double[] dept;
     private String[] token;
-    constant con = new constant();
     private File loadFile;
 
     public MainButtons(LegendPanel legendPanel) {
@@ -170,7 +169,7 @@ public class MainButtons {
         double topHorizon = dept - 200;
         double minDept = Math.min(Fluid, dept);
         if (Fluid <= topHorizon) return 0;
-        double GasVolume = con.WidthY * con.LengthX * (minDept - (topHorizon));
+        double GasVolume = constant.WidthY * constant.LengthX * (minDept - (topHorizon));
         return GasVolume;
     }
 
@@ -222,11 +221,7 @@ public class MainButtons {
 
     public void checkAlphabet(String[] token) {
         for (int i = 0; i < token.length; i++) {
-            if (token[i].matches("[a-zA-Z]+")) {
-                token[i] = "0";
-            } else if (token[i].equalsIgnoreCase("-infinity")) {
-                token[i] = "0";
-            } else if (token[i].equalsIgnoreCase("infinity")) {
+            if (!token[i].matches("\\d+")) {
                 token[i] = "0";
             }
         }
