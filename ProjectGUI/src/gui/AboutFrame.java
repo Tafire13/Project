@@ -14,7 +14,7 @@ public class AboutFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1250, 800);
         setLocationRelativeTo(null);
-        setResizable(false);
+        setUndecorated(true);
         setLayout(new BorderLayout());
         getContentPane().setBackground(ThemeColors.white);
         addComponentAbout();

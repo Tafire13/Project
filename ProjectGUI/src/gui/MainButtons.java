@@ -184,7 +184,17 @@ public class MainButtons {
 
     public void calculateDepth(double[] dept, String[] token, double fluid) {
         for (int i = 0; i < token.length; i++) {
-            checkAlphabet(token);
+            if (!token[i].matches("\\d+") || token[i].equals("0")) {
+                dept[i] = 0;
+                gasVolume[i] = 0;
+                PercenGas[i] = 0;
+
+                Grid[i] = new JPanel();
+                Grid[i].setBorder(new LineBorder(ThemeColors.black, 1));
+                Grid[i].add(new JLabel("0%"));
+                Grid[i].setFocusable(false);
+                continue;
+            }
             dept[i] = Double.parseDouble(token[i]);
             gasVolume[i] = getGasVolume(dept[i], fluid);
             PercenGas[i] = getPercen(dept[i], fluid);
